@@ -10,7 +10,7 @@
     >
     <NuxtLink
       class="bg-gray-800 px-10 py-3 rounded-full hover:bg-gray-700 duration-500"
-      to="/signin"
+      to="/login"
       >Sign in</NuxtLink
     >
   </div>
