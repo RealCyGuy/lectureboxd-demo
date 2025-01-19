@@ -77,9 +77,15 @@ onMounted(() => {
       "Biology",
       "Soil Science",
       "Mechanical Engineering",
+      "Software Engineering",
+      "English",
+      "French",
+      "German Studies",
+      "Psychology",
+      "Finance",
     ];
-    const first_names = ["Cyrus", "Walid", "Emily", "Isabel", "James", "Michael", "Jack", "Tyler", "Lawrence", "Miley", "Julia", "Kanye"];
-    const last_names = ["Doe", "Smith", "Cyrus", "Outlaw", "Solace", "Bardot", "West"];
+    const first_names = ["Cyrus", "Walid", "Emily", "Isabel", "James", "Michael", "Jack", "Tyler", "Lawrence", "Miley", "Julia", "Kanye", "William", "Zachary", "Elon", "Smith"];
+    const last_names = ["Doe", "Smith", "Cyrus", "Outlaw", "Solace", "Bardot", "West", "Bieber", "Cuban", "Trump", "McGill", "Came", "Jamie", "Henderson", "Z", "Devpost", "Name", "Poli"];
     users.value.push({
       name:
           first_names[Math.floor(Math.random() * first_names.length)] +
