@@ -9,7 +9,7 @@
       <input
         type="text"
         id="name"
-        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/80"
+        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/60"
         placeholder="John Doe"
       />
     </div>
@@ -18,7 +18,7 @@
       <input
         type="email"
         id="email"
-        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/80"
+        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/60"
         placeholder="student@mail.mcgill.ca"
       />
     </div>
@@ -27,7 +27,7 @@
       <input
         type="text"
         id="major"
-        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/80"
+        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/60"
         placeholder="Computer Science"
       />
     </div>
@@ -35,7 +35,7 @@
       <label for="year">Year</label>
       <select
         id="year"
-        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/80"
+        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/60"
         placeholder="student@mail.mcgill.ca"
       >
         <option v-for="i in Array(10).keys()" :value="i">U{{ i }}</option>
@@ -56,11 +56,12 @@
       <input
         type="text"
         id="courses"
-        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/80"
+        class="border-2 border-white rounded px-5 py-2 bg-inherit outline-none placeholder:text-white/60"
         v-model="course"
         placeholder="Search courses..."
+        autocomplete="off"
       />
-      <div class="flex flex-col gap-5 justify-between">
+      <div class="flex flex-col gap-5 justify-between" v-if="course">
         <ul class="overflow-scroll max-h-40 flex flex-wrap gap-2">
           <li v-for="course in autocomplete" :key="course">
             <button
@@ -81,11 +82,24 @@ import courses from "~/courses.txt?raw";
 
 const courses_list = courses.split("\n");
 const course = ref("");
+const refactored_courses = formattedCourses(courses_list);
 
 const user_courses = reactive(new Set());
 const autocomplete = computed(() => {
-  return courses_list
-    .filter((c) => c.toLowerCase().startsWith(course.value.toLowerCase()))
+  return refactored_courses.filter((c) => normaliseCourses(c).startsWith(normaliseCourses(course.value)))
     .slice(0, 1000);
 });
+
+function formattedCourses(list){
+  let res = [];
+  for(const course of list){
+    res.push(course.replace(/([a-zA-Z]+)(\d+)/, '$1 $2'));
+  }
+  return res
+}
+
+function normaliseCourses(course){
+  return course.replaceAll(/[ -]/g, '').toLowerCase();
+}
+
 </script>
