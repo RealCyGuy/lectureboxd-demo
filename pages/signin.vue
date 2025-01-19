@@ -118,8 +118,8 @@ function formattedCourses(list) {
   return res;
 }
 
-function normaliseCourses(course) {
-  return course.replaceAll(/[ -]/g, "").toLowerCase();
+function normaliseCourses(course){
+  return course.replaceAll(/([^a-zA-Z0-9]+)/g, '').toLowerCase();
 }
 
 async function submit() {
